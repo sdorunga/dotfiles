@@ -1,0 +1,43 @@
+[user]
+  name = Stefan Dorunga
+  email = sdorunga@housetrip.com
+[github]
+  user = sdorunga1
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  df = diff
+  lg = log -p
+  alog = log --graph --oneline --all
+	g = grep --break --heading --line-number --color=always
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[format]
+  pretty = %C(yellow)%h%Creset %Cgreen[%cr]%Creset (%an) %s
+[pull]
+  default = current
+[push]
+  default = current
+[core]
+	excludesfile = ~/.gitignore
+  editor = /usr/local/bin/vim
+[pivotal-tracker]
+	token = 7e6e0d835f9cd8a25a86d3f72386bf57

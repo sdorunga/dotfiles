@@ -1,0 +1,208 @@
+execute pathogen#infect()
+execute pathogen#helptags()
+
+" sets a better regexp engine
+set re=1
+
+set nocompatible                " choose no compatibility with legacy vi
+"syntax on
+syntax enable
+set encoding=utf-8
+set showcmd                     " display incomplete commands
+filetype plugin indent on       " load file type plugins + indentation
+
+"" Whitespace
+set nowrap                      " don't wrap lines
+set tabstop=2 shiftwidth=2      " a tab is two spaces (or set this to 4)
+set expandtab                   " use spaces, not tabs (optional)
+set backspace=indent,eol,start  " backspace through everything in insert mode
+
+"" Searching
+set hlsearch                    " highlight matches
+set incsearch                   " incremental searching
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter
+"""""set cursorline
+
+colorscheme gruvbox
+set bg=dark
+
+set number                          " show line numbers
+
+"" CMD+T
+let g:CommandTMaxHeight=15      " show 15 results maximum
+
+" Store temporary files in a central spot
+" set backup
+" set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+" Fix slow O inserts
+:set timeout timeoutlen=1000 ttimeoutlen=100
+
+" Go left and right between buffers
+nnoremap <c-o> :bp<CR>
+nnoremap <c-p> :bn<CR>
+
+" git fugitive
+noremap <leader>gb :Gblame<CR>
+
+" Powerline stuff
+"set laststatus=2   " Always show the statusline
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+" let g:Powerline_symbols = 'fancy'
+
+"Ag
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  "     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" mapping for line moving
+nnoremap <c-j> :m .+1<CR>==
+nnoremap <c-k> :m .-2<CR>==
+inoremap <c-j> <Esc>:m .+1<CR>==gi
+inoremap <c-k> <Esc>:m .-2<CR>==gi
+vnoremap <c-j> :m '>+1<CR>gv=gv
+vnoremap <c-k> :m '<-2<CR>gv=gv
+
+" faster screen redraw
+set ttyfast
+
+"remap leader to ',' which is much easier than '\'"
+let mapleader = ","
+
+" Open NERDTree with [<leader>d]
+map <Leader>d :NERDTreeToggle<CR>
+
+" " Show current file in the NERDTree hierarchy
+map <Leader>D :NERDTreeFind<CR>]
+
+" Better split management, kept in sync with tmux' mappings of (<prefix>| and
+" <prefix>-)
+noremap <leader>- :sp<CR><C-w>j
+noremap <leader>\| :vsp<CR><C-w>l)
+
+" Allow resizing splits with =/- for up/down and +/_ right/left (repeatable w/hold too)
+"  if bufwinnr(1)
+"    map = <C-W>+
+"    map - <C-W>-
+"    map + <C-W>>
+"    map _ <C-W><
+"  endif
+
+"Update CTags
+map <Leader>ct :!ctags -R --exclude=.git --exclude=log --exclude=.svn --verbose=yes * <CR>
+
+" Exit out of insert with jj
+inoremap jj <ESC>
+
+" Automatically source this file after it's saved
+" autocmd! bufwritepost .vimrc source ~/.vimrc
+
+"map Ack! current word to ,a
+noremap <Leader>a :Ack! <cword><cr>
+
+" Execute ruby code in comment
+nmap <buffer> <F4> <Plug>(xmpfilter-run)
+xmap <buffer> <F4> <Plug>(xmpfilter-run)
+imap <buffer> <F4> <Plug>(xmpfilter-run)
+nmap <buffer> <F3> <Plug>(xmpfilter-mark)
+xmap <buffer> <F3> <Plug>(xmpfilter-mark)
+imap <buffer> <F3> <Plug>(xmpfilter-mark)
+
+
+set clipboard=unnamed " use clipboard for yank
+
+
+set synmaxcol=200 " no syntax highlighting for really long lines
+
+" show matching brackets for a moment
+set showmatch
+
+" how many tenths of a second to blink matching brackets for
+set matchtime=5
+
+" Minimal number of screen lines to keep above and below the cursor
+set scrolloff=10
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Folding
+" Enable folding, but by default make it act like folding is off, because
+" folding is annoying in anything but a few rare cases
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Turn on folding
+set foldenable
+
+" Make folding indent sensitive
+set foldmethod=indent
+
+" Don't autofold anything (but I can still fold manually)
+set foldlevel=100
+
+" don't open folds when you search into them
+set foldopen-=search
+
+" don't open folds when you undo stuff
+set foldopen-=undo
+
+" Auto reload files on change
+:set autoread 
+
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" Don't use backup and swap files
+set nobackup
+set noswapfile
+
+" Disable move keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+
+"map <left> :bp<CR>
+"map <right> :bn<CR>
+"map <down> :bd<CR>
+
+"make solarized compatible with terminal
+let g:solarized_termcolors=256
+
+"Support for 256 colors
+"set t_Co=256
+
+"show trailing whitespace
+set list
+
+"increase size of linenumber gutter
+set numberwidth=5
+
+nmap <C-t> :CtrlP<CR>
+"autocomplete for commands
+set wildmenu
+set wildmode=list:longest,full
+
+"remap for running tests from vim
+map ,t :w\|:!bundle exec ruby -Itest %<cr>
+
+" show line on 80 char word limit
+set colorcolumn=80
+
+"fold guides
+set foldcolumn=1
+
+" save shortcut shortcut
+map <leader>w :w<cr>"
+
+" define a sign
+autocmd BufEnter * sign define dummy
+" populate gutter with empty sign
+autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
