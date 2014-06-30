@@ -1,15 +1,44 @@
-execute pathogen#infect()
-execute pathogen#helptags()
+set nocompatible                " choose no compatibility with legacy vi
+filetype off
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tomasr/molokai'
+Plugin 'morhetz/gruvbox'
+Plugin 'bling/vim-airline'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+" load file type plugins + indentation
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList          - list configured plugins
+" :PluginInstall(!)    - install (update) plugins
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 " sets a better regexp engine
 set re=1
 
-set nocompatible                " choose no compatibility with legacy vi
-"syntax on
 syntax enable
 set encoding=utf-8
 set showcmd                     " display incomplete commands
-filetype plugin indent on       " load file type plugins + indentation
 
 "" Whitespace
 set nowrap                      " don't wrap lines
@@ -174,7 +203,7 @@ map <right> <nop>
 "map <down> :bd<CR>
 
 "make solarized compatible with terminal
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 
 "Support for 256 colors
 "set t_Co=256
