@@ -16,6 +16,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tomasr/molokai'
 Plugin 'morhetz/gruvbox'
 Plugin 'bling/vim-airline'
+Plugin 'mileszs/ack.vim'
+Plugin 'rizzatti/dash.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -77,8 +79,8 @@ nnoremap <c-p> :bn<CR>
 noremap <leader>gb :Gblame<CR>
 
 " Powerline stuff
-"set laststatus=2   " Always show the statusline
-set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+set laststatus=2   " Always show the statusline
+"bet statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 " let g:Powerline_symbols = 'fancy'
 
 "Ag
@@ -235,3 +237,6 @@ map <leader>w :w<cr>"
 autocmd BufEnter * sign define dummy
 " populate gutter with empty sign
 autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
+"Turn on airline
+let g:airline#extensions#tabline#enabled = 1
