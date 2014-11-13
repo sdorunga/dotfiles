@@ -94,7 +94,6 @@ PROMPT_COMMAND=set_bash_prompt
 
 
 eval "$(rbenv init -)"
-eval "$($HOME/.ht/bin/ht init -)"
 
 #function for git autocomplete
 if [ -f ~/.git-completion.bash ]; then
