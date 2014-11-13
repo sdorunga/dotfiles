@@ -6,7 +6,7 @@ alias bi="bundle check || bundle install --path vendor/bundle --jobs 4"
 alias bio="bundle check || bundle install --path vendor/bundle"
 alias be="bundle exec"
 alias server="bundle exec script/server"
-alias ctags='ctags -R --languages=ruby --exclude=.git --exclude=log .'
+alias ctag='ctags -R --languages=ruby --exclude=.git --exclude=log .'
 alias console="bundle exec script/console --sandbox"
 alias f='foreman run bundle exec'
 alias sp="vendor/bundle/bin/spec"
