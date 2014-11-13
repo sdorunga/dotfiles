@@ -1,13 +1,12 @@
 PATH="./vendor/bundle/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH=$PATH
-alias te='travis enable -r HouseTrip/HouseTrip-Web-App --pro'
-alias td='travis disable -r HouseTrip/HouseTrip-Web-App --pro'
 #alias bi="bundle install --path vendor/bundle --binstubs=vendor/bundle/bin"
 alias rspec='be rspec'
 alias bi="bundle check || bundle install --path vendor/bundle --jobs 4"
 alias bio="bundle check || bundle install --path vendor/bundle"
 alias be="bundle exec"
 alias server="bundle exec script/server"
+alias ctags='ctags -R --languages=ruby --exclude=.git --exclude=log .'
 alias console="bundle exec script/console --sandbox"
 alias f='foreman run bundle exec'
 alias sp="vendor/bundle/bin/spec"
@@ -95,7 +94,6 @@ PROMPT_COMMAND=set_bash_prompt
 
 
 eval "$(rbenv init -)"
-eval "$($HOME/.ht/bin/ht init -)"
 
 #function for git autocomplete
 if [ -f ~/.git-completion.bash ]; then
