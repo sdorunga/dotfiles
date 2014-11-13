@@ -4,8 +4,8 @@ alias te='travis enable -r HouseTrip/HouseTrip-Web-App --pro'
 alias td='travis disable -r HouseTrip/HouseTrip-Web-App --pro'
 #alias bi="bundle install --path vendor/bundle --binstubs=vendor/bundle/bin"
 alias rspec='be rspec'
-alias bi="bundle check || bundle install --path vendor --jobs 4"
-alias bio="bundle check || bundle install --path vendor"
+alias bi="bundle check || bundle install --path vendor/bundle --jobs 4"
+alias bio="bundle check || bundle install --path vendor/bundle"
 alias be="bundle exec"
 alias server="bundle exec script/server"
 alias console="bundle exec script/console --sandbox"
