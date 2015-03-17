@@ -5,7 +5,6 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 PATH="./vendor/bundle/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH=$PATH
-#alias bi="bundle install --path vendor/bundle --binstubs=vendor/bundle/bin"
 alias rspec='be rspec'
 alias bi="bundle check || bundle install --path vendor/bundle --jobs 4"
 alias bio="bundle check || bundle install --path vendor/bundle"
@@ -30,11 +29,6 @@ alias gca='git commit --amend'
 alias z='zeus'
 #alias sts='dtach -n mongod.socket mongod; dtach -n redis.socket redis-server; dtach -n memcached.socket memcached;'
 alias c='cdselecta'
-# export RUBY_HEAP_MIN_SLOTS=600000
-# export RUBY_HEAP_SLOTS_INCREMENT=10000
-# export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.8
-# export RUBY_GC_MALLOC_LIMIT=59000000
-# export RUBY_HEAP_FREE_MIN=100000
 function cdselecta { cd $(ls | selecta); }
 export -f cdselecta
 
@@ -94,7 +88,7 @@ function set_bash_prompt {
   PS4='+ '
 }
 
-PROMPT_COMMAND=set_bash_prompt
+PROMPT_COMMAND=set_bash_prompt; $PROMPT_COMMAND
 
 
 
