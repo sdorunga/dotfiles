@@ -1,3 +1,8 @@
+# sets the history file to append mode so you don't lose history on close
+shopt -s histappend
+# immedietly writes commands to histroy after they're executed
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 PATH="./vendor/bundle/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH=$PATH
 #alias bi="bundle install --path vendor/bundle --binstubs=vendor/bundle/bin"

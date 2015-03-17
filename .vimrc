@@ -1,3 +1,4 @@
+set cursorline
 set nocompatible                " choose no compatibility with legacy vi
 filetype off
 
@@ -11,6 +12,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tomasr/molokai'
@@ -18,6 +20,24 @@ Plugin 'morhetz/gruvbox'
 Plugin 'bling/vim-airline'
 Plugin 'mileszs/ack.vim'
 Plugin 'rizzatti/dash.vim'
+" Snippet engine
+Plugin 'SirVer/ultisnips'
+" Snippet repo
+Plugin 'honza/vim-snippets'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'majutsushi/tagbar'
+Plugin 'xolox/vim-misc'
+Plugin 'scrooloose/syntastic'
+Plugin 't9md/vim-ruby-xmpfilter'
+Plugin 'vimwiki/vimwiki'
+" Plugins for clojure
+Plugin 'tpope/vim-fireplace'
+Plugin 'guns/vim-clojure-static'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'guns/vim-clojure-highlight'
+Plugin 'vim-scripts/paredit.vim'
+"
+Plugin 'mbbill/undotree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -53,12 +73,11 @@ set hlsearch                    " highlight matches
 set incsearch                   " incremental searching
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless they contain at least one capital letter
-"""""set cursorline
 
 colorscheme gruvbox
-set bg=dark
 
 set number                          " show line numbers
+set relativenumber
 
 "" CMD+T
 let g:CommandTMaxHeight=15      " show 15 results maximum
@@ -70,10 +89,6 @@ let g:CommandTMaxHeight=15      " show 15 results maximum
 
 " Fix slow O inserts
 :set timeout timeoutlen=1000 ttimeoutlen=100
-
-" Go left and right between buffers
-nnoremap <c-o> :bp<CR>
-nnoremap <c-p> :bn<CR>
 
 " git fugitive
 noremap <leader>gb :Gblame<CR>
@@ -120,12 +135,12 @@ noremap <leader>- :sp<CR><C-w>j
 noremap <leader>\| :vsp<CR><C-w>l)
 
 " Allow resizing splits with =/- for up/down and +/_ right/left (repeatable w/hold too)
-"  if bufwinnr(1)
-"    map = <C-W>+
-"    map - <C-W>-
-"    map + <C-W>>
-"    map _ <C-W><
-"  endif
+if bufwinnr(1)
+  map = <C-W>+
+  map - <C-W>-
+  map + <C-W>>
+  map _ <C-W><
+endif
 
 "Update CTags
 map <Leader>ct :!ctags -R --exclude=.git --exclude=log --exclude=.svn --verbose=yes * <CR>
@@ -134,7 +149,7 @@ map <Leader>ct :!ctags -R --exclude=.git --exclude=log --exclude=.svn --verbose=
 inoremap jj <ESC>
 
 " Automatically source this file after it's saved
-" autocmd! bufwritepost .vimrc source ~/.vimrc
+autocmd! bufwritepost .vimrc source ~/.vimrc
 
 "map Ack! current word to ,a
 noremap <Leader>a :Ack! <cword><cr>
@@ -151,7 +166,7 @@ imap <buffer> <F3> <Plug>(xmpfilter-mark)
 set clipboard=unnamed " use clipboard for yank
 
 
-set synmaxcol=200 " no syntax highlighting for really long lines
+"set synmaxcol=200 " no syntax highlighting for really long lines
 
 " show matching brackets for a moment
 set showmatch
@@ -195,10 +210,10 @@ set nobackup
 set noswapfile
 
 " Disable move keys
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+" map <up> <nop>
+" map <down> <nop>
+" map <left> <nop>
+" map <right> <nop>
 
 "map <left> :bp<CR>
 "map <right> :bn<CR>
@@ -233,6 +248,9 @@ set foldcolumn=1
 " save shortcut shortcut
 map <leader>w :w<cr>"
 
+" Make space more useful
+nnoremap <space> za
+
 " define a sign
 autocmd BufEnter * sign define dummy
 " populate gutter with empty sign
@@ -240,3 +258,33 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 
 "Turn on airline
 let g:airline#extensions#tabline#enabled = 1
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+"XMPFILTER
+let g:xmpfilter_cmd = "seeing_is_believing"
+
+autocmd FileType ruby nmap <buffer> <D-m> <Plug>(seeing_is_believing-mark)
+autocmd FileType ruby xmap <buffer> <D-m> <Plug>(seeing_is_believing-mark)
+autocmd FileType ruby imap <buffer> <D-m> <Plug>(seeing_is_believing-mark)
+
+autocmd FileType ruby nmap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
+autocmd FileType ruby xmap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
+autocmd FileType ruby imap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
+
+" xmpfilter compatible
+autocmd FileType ruby nmap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
+autocmd FileType ruby xmap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
+autocmd FileType ruby imap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
+
+" auto insert mark at appropriate spot.
+autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing_is_believing-run)
+autocmd FileType ruby xmap <buffer> <F5> <Plug>(seeing_is_believing-run)
+autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing_is_believing-run)
