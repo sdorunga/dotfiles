@@ -34,6 +34,10 @@ export -f cdselecta
 
 export TERM="screen-256color" # use screen-256color to play nicer with tmux
 export EDITOR="/usr/local/bin/vim"
+
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTFILE=~/.bash_eternal_history
 # colour codes
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
@@ -101,3 +105,4 @@ fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="~/go/bin:$PATH"
