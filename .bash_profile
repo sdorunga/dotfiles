@@ -1,13 +1,16 @@
+# sets the history file to append mode so you don't lose history on close
+shopt -s histappend
+# immedietly writes commands to histroy after they're executed
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 PATH="./vendor/bundle/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH=$PATH
-alias te='travis enable -r HouseTrip/HouseTrip-Web-App --pro'
-alias td='travis disable -r HouseTrip/HouseTrip-Web-App --pro'
-#alias bi="bundle install --path vendor/bundle --binstubs=vendor/bundle/bin"
 alias rspec='be rspec'
-alias bi="bundle check || bundle install --path vendor --jobs 4"
-alias bio="bundle check || bundle install --path vendor"
+alias bi="bundle check || bundle install --path vendor/bundle --jobs 4"
+alias bio="bundle check || bundle install --path vendor/bundle"
 alias be="bundle exec"
 alias server="bundle exec script/server"
+alias ctag='ctags -R --languages=ruby --exclude=.git --exclude=log .'
 alias console="bundle exec script/console --sandbox"
 alias f='foreman run bundle exec'
 alias sp="vendor/bundle/bin/spec"
@@ -26,16 +29,15 @@ alias gca='git commit --amend'
 alias z='zeus'
 #alias sts='dtach -n mongod.socket mongod; dtach -n redis.socket redis-server; dtach -n memcached.socket memcached;'
 alias c='cdselecta'
-# export RUBY_HEAP_MIN_SLOTS=600000
-# export RUBY_HEAP_SLOTS_INCREMENT=10000
-# export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.8
-# export RUBY_GC_MALLOC_LIMIT=59000000
-# export RUBY_HEAP_FREE_MIN=100000
 function cdselecta { cd $(ls | selecta); }
 export -f cdselecta
 
 export TERM="screen-256color" # use screen-256color to play nicer with tmux
 export EDITOR="/usr/local/bin/vim"
+
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTFILE=~/.bash_eternal_history
 # colour codes
 RED="\[\033[0;31m\]"
 YELLOW="\[\033[0;33m\]"
@@ -90,12 +92,11 @@ function set_bash_prompt {
   PS4='+ '
 }
 
-PROMPT_COMMAND=set_bash_prompt
+PROMPT_COMMAND=set_bash_prompt; $PROMPT_COMMAND
 
 
 
 eval "$(rbenv init -)"
-eval "$($HOME/.ht/bin/ht init -)"
 
 #function for git autocomplete
 if [ -f ~/.git-completion.bash ]; then
@@ -105,3 +106,4 @@ fi
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 export ANDROID_HOME=/usr/local/opt/android-sdk
+export PATH="~/go/bin:$PATH"

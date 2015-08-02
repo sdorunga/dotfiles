@@ -1,0 +1,7 @@
+--ignore-dir=log
+--ignore-dir=tmp
+--ignore-dir=vendor
+--ignore-dir=public/generated
+--ignore-dir=tags
+--ignore-file=ext:*min*
+--sort-files

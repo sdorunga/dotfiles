@@ -3,3 +3,4 @@
 vendor/bundle
 vendor/ruby
 .env
+tags
