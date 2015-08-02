@@ -16,7 +16,12 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tomasr/molokai'
 Plugin 'morhetz/gruvbox'
 Plugin 'bling/vim-airline'
+Plugin 't9md/vim-ruby-xmpfilter'
+Plugin 'slim-template/vim-slim'
 
+Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-fireplace'
+Plugin 'vim-clojure-highlight'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 " load file type plugins + indentation
@@ -138,12 +143,13 @@ inoremap jj <ESC>
 noremap <Leader>a :Ack! <cword><cr>
 
 " Execute ruby code in comment
-nmap <buffer> <F4> <Plug>(xmpfilter-run)
-xmap <buffer> <F4> <Plug>(xmpfilter-run)
-imap <buffer> <F4> <Plug>(xmpfilter-run)
-nmap <buffer> <F3> <Plug>(xmpfilter-mark)
-xmap <buffer> <F3> <Plug>(xmpfilter-mark)
-imap <buffer> <F3> <Plug>(xmpfilter-mark)
+let g:xmpfilter_cmd = "seeing_is_believing"
+nmap <buffer> <F4> <Plug>(seeing_is_believing-run_-x)
+xmap <buffer> <F4> <Plug>(seeing_is_believing-run_-x)
+imap <buffer> <F4> <Plug>(seeing_is_believing-run_-x)
+nmap <buffer> <F3> <Plug>(seeing_is_believing-mark)
+xmap <buffer> <F3> <Plug>(seeing_is_believing-mark)
+imap <buffer> <F3> <Plug>(seeing_is_believing-mark)
 
 
 set clipboard=unnamed " use clipboard for yank
