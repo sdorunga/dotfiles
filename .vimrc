@@ -20,6 +20,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tomasr/molokai'
 Plugin 'morhetz/gruvbox'
 Plugin 'bling/vim-airline'
+Plugin 'slim-template/vim-slim'
 Plugin 'mileszs/ack.vim'
 Plugin 'rizzatti/dash.vim'
 " Snippet engine
@@ -164,12 +165,13 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 noremap <Leader>a :Ack! <cword><cr>
 
 " Execute ruby code in comment
-nmap <buffer> <F4> <Plug>(xmpfilter-run)
-xmap <buffer> <F4> <Plug>(xmpfilter-run)
-imap <buffer> <F4> <Plug>(xmpfilter-run)
-nmap <buffer> <F3> <Plug>(xmpfilter-mark)
-xmap <buffer> <F3> <Plug>(xmpfilter-mark)
-imap <buffer> <F3> <Plug>(xmpfilter-mark)
+let g:xmpfilter_cmd = "seeing_is_believing"
+nmap <buffer> <F4> <Plug>(seeing_is_believing-run_-x)
+xmap <buffer> <F4> <Plug>(seeing_is_believing-run_-x)
+imap <buffer> <F4> <Plug>(seeing_is_believing-run_-x)
+nmap <buffer> <F3> <Plug>(seeing_is_believing-mark)
+xmap <buffer> <F3> <Plug>(seeing_is_believing-mark)
+imap <buffer> <F3> <Plug>(seeing_is_believing-mark)
 
 
 set clipboard=unnamed " use clipboard for yank

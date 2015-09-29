@@ -109,6 +109,7 @@ fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+export ANDROID_HOME=/usr/local/opt/android-sdk
 export PATH="~/go/bin:$PATH"
 ### Node stuff
 export NVM_DIR=~/.nvm
