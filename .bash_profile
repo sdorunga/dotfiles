@@ -26,13 +26,17 @@ alias gpl='git pull'
 alias gh='git push'
 alias gc='git commit'
 alias gca='git commit --amend'
-alias z='zeus'
+alias sicp='racket -i -p neil/sicp -l xrepl'
 #alias sts='dtach -n mongod.socket mongod; dtach -n redis.socket redis-server; dtach -n memcached.socket memcached;'
 alias c='cdselecta'
 function cdselecta { cd $(ls | selecta); }
+
+# emacs stuff
+alias e="emacsclient -c"
+alias es='emacs -daemon'
+
 export -f cdselecta
 
-export TERM="screen-256color" # use screen-256color to play nicer with tmux
 export EDITOR="/usr/local/bin/vim"
 
 export HISTFILESIZE=
@@ -106,3 +110,10 @@ fi
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 export PATH="~/go/bin:$PATH"
+### Node stuff
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+export FACEBOOK_APP_ID=853246978082738
+export FACEBOOK_APP_SECRET=4e041c63820d4614203e82a3960880ab
+
+. `brew --prefix`/etc/profile.d/z.sh
