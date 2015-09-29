@@ -10,6 +10,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'seeing_is_believing'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
@@ -36,6 +38,10 @@ Plugin 'guns/vim-clojure-static'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'guns/vim-clojure-highlight'
 Plugin 'vim-scripts/paredit.vim'
+"Plugins for JS
+Plugin 'pangloss/vim-javascript'
+" Test run mapping
+Plugin 'janko-m/vim-test'
 "
 Plugin 'mbbill/undotree'
 
@@ -136,7 +142,7 @@ noremap <leader>\| :vsp<CR><C-w>l)
 
 " Allow resizing splits with =/- for up/down and +/_ right/left (repeatable w/hold too)
 if bufwinnr(1)
-  map = <C-W>+
+ " map = <C-W>+
   map - <C-W>-
   map + <C-W>>
   map _ <C-W><
@@ -147,6 +153,9 @@ map <Leader>ct :!ctags -R --exclude=.git --exclude=log --exclude=.svn --verbose=
 
 " Exit out of insert with jj
 inoremap jj <ESC>
+
+" Allows editing of crontabs. They require you write files in place
+autocmd filetype crontab setlocal nobackup nowritebackup
 
 " Automatically source this file after it's saved
 autocmd! bufwritepost .vimrc source ~/.vimrc
@@ -223,7 +232,7 @@ set noswapfile
 " let g:solarized_termcolors=256
 
 "Support for 256 colors
-"set t_Co=256
+set t_Co=256
 
 "show trailing whitespace
 set list
@@ -260,7 +269,7 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 let g:airline#extensions#tabline#enabled = 1
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsExpandTrigger="<c-f>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
@@ -290,6 +299,13 @@ autocmd FileType ruby xmap <buffer> <F5> <Plug>(seeing_is_believing-run)
 autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing_is_believing-run)
 
 
-autocmd FileType ruby,eruby
-      \ set foldmethod=expr |
-      \ set foldexpr=getline(v:lnum)=~'^\\s*#'
+"autocmd FileType ruby,eruby
+"      \ set foldmethod=expr |
+"      \ set foldexpr=getline(v:lnum)=~'^\\s*#'
+"
+" Test running mappings
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
