@@ -118,3 +118,5 @@ export FACEBOOK_APP_ID=853246978082738
 export FACEBOOK_APP_SECRET=4e041c63820d4614203e82a3960880ab
 
 . `brew --prefix`/etc/profile.d/z.sh
+
+t

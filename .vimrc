@@ -46,6 +46,8 @@ Plugin 'janko-m/vim-test'
 "
 Plugin 'mbbill/undotree'
 
+Plugin 'lambdatoast/elm.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 " load file type plugins + indentation
@@ -95,7 +97,7 @@ let g:CommandTMaxHeight=15      " show 15 results maximum
 " set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " Fix slow O inserts
-:set timeout timeoutlen=1000 ttimeoutlen=100
+:set timeout timeoutlen=1000 ttimeoutlen=0
 
 " git fugitive
 noremap <leader>gb :Gblame<CR>
@@ -226,9 +228,9 @@ set noswapfile
 " map <left> <nop>
 " map <right> <nop>
 
-"map <left> :bp<CR>
-"map <right> :bn<CR>
-"map <down> :bd<CR>
+map <left> :bp<CR>
+map <right> :bn<CR>
+map <down> :bd<CR>
 
 "make solarized compatible with terminal
 " let g:solarized_termcolors=256
