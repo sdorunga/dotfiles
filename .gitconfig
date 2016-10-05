@@ -41,3 +41,5 @@
   editor = /usr/local/bin/vim
 [pivotal-tracker]
 	token = 7e6e0d835f9cd8a25a86d3f72386bf57
+[advice]
+	statusHints = false

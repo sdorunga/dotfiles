@@ -11,7 +11,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'seeing_is_believing'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
@@ -19,6 +18,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tomasr/molokai'
 Plugin 'morhetz/gruvbox'
+Plugin 'xero/sourcerer.vim'
 Plugin 'bling/vim-airline'
 Plugin 'slim-template/vim-slim'
 Plugin 'mileszs/ack.vim'
@@ -43,6 +43,7 @@ Plugin 'vim-scripts/paredit.vim'
 Plugin 'pangloss/vim-javascript'
 " Test run mapping
 Plugin 'janko-m/vim-test'
+Plugin 'dleonard0/pony-vim-syntax'
 "
 Plugin 'mbbill/undotree'
 
@@ -52,17 +53,6 @@ Plugin 'lambdatoast/elm.vim'
 call vundle#end()            " required
 " load file type plugins + indentation
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
 " sets a better regexp engine
 set re=1
@@ -97,7 +87,7 @@ let g:CommandTMaxHeight=15      " show 15 results maximum
 " set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
 " Fix slow O inserts
-:set timeout timeoutlen=1000 ttimeoutlen=0
+:set timeout timeoutlen=500 ttimeoutlen=0
 
 " git fugitive
 noremap <leader>gb :Gblame<CR>
@@ -117,6 +107,8 @@ if executable('ag')
   "     " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+nnoremap <leader>re :set relativenumber!<CR>
 
 " mapping for line moving
 nnoremap <c-j> :m .+1<CR>==
@@ -143,14 +135,6 @@ map <Leader>D :NERDTreeFind<CR>]
 noremap <leader>- :sp<CR><C-w>j
 noremap <leader>\| :vsp<CR><C-w>l)
 
-" Allow resizing splits with =/- for up/down and +/_ right/left (repeatable w/hold too)
-if bufwinnr(1)
- " map = <C-W>+
-  map - <C-W>-
-  map + <C-W>>
-  map _ <C-W><
-endif
-
 "Update CTags
 map <Leader>ct :!ctags -R --exclude=.git --exclude=log --exclude=.svn --verbose=yes * <CR>
 
@@ -164,28 +148,14 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
 "map Ack! current word to ,a
-noremap <Leader>a :Ack! <cword><cr>
-
-" Execute ruby code in comment
-let g:xmpfilter_cmd = "seeing_is_believing"
-nmap <buffer> <F4> <Plug>(seeing_is_believing-run_-x)
-xmap <buffer> <F4> <Plug>(seeing_is_believing-run_-x)
-imap <buffer> <F4> <Plug>(seeing_is_believing-run_-x)
-nmap <buffer> <F3> <Plug>(seeing_is_believing-mark)
-xmap <buffer> <F3> <Plug>(seeing_is_believing-mark)
-imap <buffer> <F3> <Plug>(seeing_is_believing-mark)
-
+noremap <Leader>ac :Ack! <cword><cr>
 
 set clipboard=unnamed " use clipboard for yank
 
-
-"set synmaxcol=200 " no syntax highlighting for really long lines
-
 " show matching brackets for a moment
-set showmatch
-
+"set showmatch
 " how many tenths of a second to blink matching brackets for
-set matchtime=5
+"set matchtime=5
 
 " Minimal number of screen lines to keep above and below the cursor
 set scrolloff=10
@@ -212,7 +182,7 @@ set foldopen-=search
 set foldopen-=undo
 
 " Auto reload files on change
-:set autoread 
+set autoread
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
@@ -222,12 +192,6 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 set nobackup
 set noswapfile
 
-" Disable move keys
-" map <up> <nop>
-" map <down> <nop>
-" map <left> <nop>
-" map <right> <nop>
-
 map <left> :bp<CR>
 map <right> :bn<CR>
 map <down> :bd<CR>
@@ -236,13 +200,10 @@ map <down> :bd<CR>
 " let g:solarized_termcolors=256
 
 "Support for 256 colors
-set t_Co=256
+"set t_Co=256
 
 "show trailing whitespace
-set list
-
-"increase size of linenumber gutter
-set numberwidth=5
+"set list
 
 nmap <C-t> :CtrlP<CR>
 "autocomplete for commands
@@ -256,7 +217,7 @@ map ,t :w\|:!bundle exec ruby -Itest %<cr>
 set colorcolumn=80
 
 "fold guides
-set foldcolumn=1
+"set foldcolumn=1
 
 " save shortcut shortcut
 map <leader>w :w<cr>"
@@ -273,40 +234,18 @@ autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('
 let g:airline#extensions#tabline#enabled = 1
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-f>"
+let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpBackwardTrigger="<c-f>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-
-
-"XMPFILTER
-let g:xmpfilter_cmd = "seeing_is_believing"
-
-autocmd FileType ruby nmap <buffer> <D-m> <Plug>(seeing_is_believing-mark)
-autocmd FileType ruby xmap <buffer> <D-m> <Plug>(seeing_is_believing-mark)
-autocmd FileType ruby imap <buffer> <D-m> <Plug>(seeing_is_believing-mark)
-
-autocmd FileType ruby nmap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
-autocmd FileType ruby xmap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
-autocmd FileType ruby imap <buffer> <D-c> <Plug>(seeing_is_believing-clean)
-
-" xmpfilter compatible
-autocmd FileType ruby nmap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
-autocmd FileType ruby xmap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
-autocmd FileType ruby imap <buffer> <D-r> <Plug>(seeing_is_believing-run_-x)
-
-" auto insert mark at appropriate spot.
-autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing_is_believing-run)
-autocmd FileType ruby xmap <buffer> <F5> <Plug>(seeing_is_believing-run)
-autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing_is_believing-run)
-
 
 "autocmd FileType ruby,eruby
 "      \ set foldmethod=expr |
 "      \ set foldexpr=getline(v:lnum)=~'^\\s*#'
 "
+let test#ruby#rspec#executable = 'zeus rspec'
 " Test running mappings
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>

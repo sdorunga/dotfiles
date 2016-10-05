@@ -111,6 +111,9 @@ fi
 export PATH="/usr/local/heroku/bin:$PATH"
 export ANDROID_HOME=/usr/local/opt/android-sdk
 export PATH="~/go/bin:$PATH"
+export PATH="vendor/texlive/bin/x86_64-darwin:$PATH"
+export PATH="/Applications/Postgres.app/Contents/Versions/9.4/bin/:$PATH"
+export ORDERWEB_HOME=/Users/stefandorunga/code/orderweb
 ### Node stuff
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
